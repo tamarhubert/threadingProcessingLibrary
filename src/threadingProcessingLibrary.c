@@ -42,6 +42,7 @@ int tpl_unlockMutex(void* mutex){
 }
 int tpl_freeMutex(void* mutex){
     pthread_mutex_destroy(mutex);
+    free(mutex);
 }
 
 #else
