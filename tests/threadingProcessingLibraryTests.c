@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "../src/threadingProcessingLibrary.h"
 
 void* threadFunc(void *arg)
@@ -10,17 +12,11 @@ void* threadFunc(void *arg)
 	while(i < 10 )
 	{
 		usleep(1);
-		threadSaveFunction("threadFunc says:");
-		threadSaveFunction(str);
+		printf("threadFunc says: %s", str);
 		++i;
 	}
 
 	return NULL;
-}
-
-threadSaveFunction(const char* msg){
-    tpl_
-    printf(msg);
 }
 
 int main(void)
