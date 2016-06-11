@@ -2,15 +2,28 @@
 #define TPL_THREADING_PROCESSING_LIBRARY_H
 #include <stdio.h>
 
-void* tpl_createThread(void* (*) (void *), void*);
-int tpl_cancelThread(void*);
-int tpl_joinThread(void*, void**);
-int tpl_freeThread(void*);
+#ifdef _WIN32
 
-void* tpl_createMutex();
-int tpl_lockMutex(void*);
-int tpl_unlockMutex(void*);
-int tpl_freeMutex(void*);
+#elif __linux__
 
+#include "pthread.h"
+typedef pthread_t tpl_Thread;
+typedef pthread_mutex_t tpl_Mutex;
+
+#else
+
+#error "unknown compiler"
+
+#endif
+
+tpl_Thread* tpl_createThread(void* (*) (void *), void*);
+int tpl_cancelThread(tpl_Thread*);
+int tpl_joinThread(tpl_Thread*, void**);
+int tpl_freeThread(tpl_Thread*);
+
+tpl_Mutex*  tpl_createMutex();
+int tpl_lockMutex(tpl_Mutex*);
+int tpl_unlockMutex(tpl_Mutex*);
+int tpl_freeMutex(tpl_Mutex*);
 
 #endif /* TPL_THREADING_PROCESSING_LIBRARY_H */
