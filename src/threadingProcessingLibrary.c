@@ -9,7 +9,31 @@
 #ifdef _WIN32
 #include <process.h>
 
-#    error "not implemented yet"
+tpl_Thread* tpl_createThread(void* (*function) (void *), void* arg){
+    return CreateThread(NULL, 0, function, arg, 0, NULL);
+}
+int tpl_cancelThread(tpl_Thread* thread){
+    return TerminateThread(thread, 0);
+}
+int tpl_joinThread(tpl_Thread* thread, void** result){
+    return WaitForSingleObject(thread, INFINITE);
+}
+int tpl_freeThread(tpl_Thread* thread){
+    return CloseHandle(thread);
+}
+
+tpl_Mutex* tpl_createMutex(){
+    return CreateMutex( NULL, FALSE, NULL);
+}
+int tpl_lockMutex(tpl_Mutex* mutex){
+    return WaitForSingleObject(mutex, INFINITE);
+}
+int tpl_unlockMutex(tpl_Mutex* mutex){
+    return ReleaseMutex(mutex);
+}
+int tpl_freeMutex(tpl_Mutex* mutex){
+    return CloseHandle(mutex);
+}
 
 #elif __linux__
 

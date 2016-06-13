@@ -1,8 +1,20 @@
+/*
+* The linked list library
+*
+* Created by: Tamar Hubert
+*/
+
 #ifndef TPL_THREADING_PROCESSING_LIBRARY_H
 #define TPL_THREADING_PROCESSING_LIBRARY_H
 #include <stdio.h>
 
 #ifdef _WIN32
+
+#include <windows.h>
+#include <process.h>
+
+typedef HANDLE tpl_Thread;
+typedef HANDLE tpl_Mutex;
 
 #elif __linux__
 
