@@ -53,6 +53,7 @@ int tpl_joinThread(tpl_Thread* thread, void** result){
 }
 int tpl_freeThread(tpl_Thread* thread){
     free(thread);
+    return thread == NULL ? 0:1;
 }
 
 tpl_Mutex* tpl_createMutex(){
@@ -69,6 +70,7 @@ int tpl_unlockMutex(tpl_Mutex* mutex){
 int tpl_freeMutex(tpl_Mutex* mutex){
     pthread_mutex_destroy(mutex);
     free(mutex);
+    return mutex == NULL ? 0:1;
 }
 
 #else
